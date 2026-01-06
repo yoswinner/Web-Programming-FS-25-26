@@ -1,0 +1,115 @@
+/* Page layout */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Navigation bar (same style as Task-1) */
+nav {
+    background-color: #2c3e50;
+    text-align: center;
+    padding: 15px 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #34495e;
+}
+
+/* Main content container */
+.container {
+    width: 70%;
+    margin: 40px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    flex: 1;
+}
+
+
+/* Headings */
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #2c3e50;
+}
+
+.intro {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+/* Ordered list styling */
+.main-list {
+    color: #1a5276;
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    list-style-type: upper-roman;
+    padding-left: 40px;
+}
+
+.main-list li {
+    margin: 12px 0;
+    padding: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for ordered list */
+.main-list li:hover {
+    background-color: #d6eaf8;
+    color: #1bb8a3;
+    font-weight: bold;
+}
+
+/* Unordered sublist styling */
+.sub-list {
+    list-style-type: square;
+    margin-top: 10px;
+    padding-left: 30px;
+    color: #6e2c00;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+}
+
+.sub-list li {
+    margin: 8px 0;
+    padding: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for unordered list */
+.sub-list li:hover {
+    background-color: #fdebd0;
+    color: #d534c8;
+    font-style: italic;
+}
+/* Footer (same style as Task-1) */
+footer {
+    margin-top: auto;
+    text-align: center;
+    padding: 20px;
+    background-color: #2c3e50;
+    color: white;
+    font-size: 14px;
+}
+
