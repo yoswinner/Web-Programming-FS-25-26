@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>User Registration</h1>
+</header>
+
+<div class="form-container">
+    <form>
+        <label>Full Name</label>
+        <input type="text" required minlength="3">
+
+        <label>Email</label>
+        <input type="email" placeholder="xyz@abc.com" required>
+
+        <label>Password</label>
+        <input type="password" placeholder="Min length: 6" required minlength="6">
+
+        <label>Confirm Password</label>
+        <input type="password" placeholder="Confirm" required minlength="6">
+
+        <label>Phone Number</label>
+        <input type="tel" pattern="[0-9]{10}" placeholder="10-digit number" required>
+
+        <label>Date of Birth</label>
+        <input type="date" required>
+
+        <label>Gender</label>
+        <select required>
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+
+        <label>City</label>
+        <input type="text" required>
+
+        <label>Country</label>
+        <input type="text" required>
+
+        <label>
+            <input type="checkbox" required>
+            I agree to the terms and conditions
+        </label>
+
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+<footer>
+    © 2025 Yash Pradhan | Web Programming
+</footer>
+
+</body>
+</html>
