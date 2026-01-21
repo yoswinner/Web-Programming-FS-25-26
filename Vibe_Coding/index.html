@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home Services</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 1. GLOBAL VARIABLES & RESET --- */
+        :root {
+            --primary-teal: #00BCD4;     /* Cyan/Teal Accent */
+            --dark-slate: #263238;       /* Dark Charcoal Background */
+            --text-dark: #333333;        /* Primary Text */
+            --text-light: #777777;       /* Secondary Text */
+            --bg-light: #f9f9f9;         /* Light Grey Background */
+            --white: #ffffff;
+            --accent-red: #ff4081;       /* Pinkish/Red for Contact Button */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px; /* Pill shape */
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--white);
+            color: var(--white);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--dark-slate);
+        }
+
+        .btn-teal {
+            background-color: var(--primary-teal);
+            color: var(--white);
+            border: none;
+        }
+
+        .btn-teal:hover {
+            background-color: #008ba3;
+        }
+
+        /* --- 2. HEADER / NAVIGATION --- */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-slate);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--primary-teal);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-teal);
+        }
+
+        .search-icon {
+            color: var(--primary-teal);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* --- 3. HERO SECTION --- */
+        .hero {
+            /* Unsplash: Modern Living Room */
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: var(--white);
+            font-size: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- 4. SERVICES GRID --- */
+        .services {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .services-header {
+            max-width: 600px;
+            margin: 0 auto 60px auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            padding: 20px;
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon-box {
+            font-size: 3rem;
+            color: var(--primary-teal);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.2rem;
+            color: var(--dark-slate);
+        }
+
+        /* --- 5. FEATURE 1 (DARK - SMART CAMERA) --- */
+        .feature-dark {
+            background-color: var(--dark-slate);
+            color: var(--white);
+            padding: 80px 0;
+        }
+
+        .feature-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .feature-text {
+            flex: 1;
+        }
+
+        .feature-image {
+            flex: 1;
+        }
+
+        .feature-image img {
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            width: 100%;
+        }
+
+        .feature-dark h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .feature-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+
+        .feature-list i {
+            color: var(--primary-teal);
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .feature-btn {
+            margin-top: 30px;
+        }
+
+        /* --- 6. FEATURE 2 (LIGHT - APP CONTROL) --- */
+        .feature-light {
+            background-color: var(--bg-light);
+            padding: 80px 0;
+        }
+
+        .feature-light .feature-container {
+            flex-direction: row-reverse;
+        }
+        
+        .feature-light h2 { color: var(--dark-slate); }
+        .feature-light li { color: var(--text-dark); }
+
+        /* --- 7. CONTACT SECTION --- */
+        .contact-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .contact-wrapper {
+            display: flex;
+            gap: 50px;
+            align-items: stretch;
+        }
+
+        .contact-form-container {
+            flex: 1;
+        }
+
+        .contact-image {
+            flex: 1;
+            /* Unsplash: Tablet on Table */
+            background: url('https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1000&auto=format&fit=crop') center/cover;
+            border-radius: 10px;
+            min-height: 400px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-family: 'Poppins', sans-serif;
+            background: #fdfdfd;
+        }
+
+        textarea.form-control {
+            border-radius: 20px;
+            resize: vertical;
+        }
+
+        .btn-send {
+            background-color: var(--accent-red);
+            color: var(--white);
+            border: none;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn-send:hover {
+            background-color: #e0356f;
+        }
+
+        /* --- 8. FOOTER --- */
+        footer {
+            background-color: var(--dark-slate);
+            color: #b0bec5;
+        }
+
+        .cta-bar {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 40px 0;
+        }
+
+        .cta-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cta-content h3 {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .main-footer {
+            padding: 60px 0 40px 0;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-logo {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: #b0bec5;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-teal);
+            padding-left: 5px;
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 992px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero h1 { font-size: 3rem; }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                height: auto;
+                padding: 15px 0;
+            }
+            .nav-links {
+                margin-top: 15px;
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .feature-container, 
+            .feature-light .feature-container,
+            .contact-wrapper,
+            .cta-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .main-footer {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .contact-info p {
+                justify-content: center;
+            }
+
+            .feature-list li {
+                justify-content: center;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-image {
+                min-height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <div class="logo">
+                <i class="fa-solid fa-house-signal"></i>
+                SMART HOME
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Pages</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><i class="fa-solid fa-magnifying-glass search-icon"></i></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Our Services</h1>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <div class="services-header">
+                <h2>Services We Provide</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon-box">
+                        <i class="fa-regular fa-lightbulb"></i>
+                    </div>
+                    <h3>Mission</h3>
+                </div>
+                <div class="service-card">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-piggy-bank"></i>
+                    </div>
+                    <h3>Energy Saving</h3>
+                </div>
+                <div class="service-card">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-temperature-arrow-up"></i>
+                    </div>
+                    <h3>Smart Heating</h3>
+                </div>
+                <div class="service-card">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3>Security Protection</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-dark">
+        <div class="container feature-container">
+            <div class="feature-text">
+                <h2>Smart Camera Control</h2>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-check"></i> 100% Wire-Free - Free of power cords</li>
+                    <li><i class="fa-solid fa-check"></i> HD Video - Enjoy sharp, detailed video</li>
+                    <li><i class="fa-solid fa-check"></i> Rechargeable - Long lasting batteries</li>
+                    <li><i class="fa-solid fa-check"></i> Quick Charging - Get fast battery charging</li>
+                    <li><i class="fa-solid fa-check"></i> 2-way Audio - Listen in or talk back</li>
+                </ul>
+                <div class="feature-btn">
+                    <a href="#" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
+            <div class="feature-image">
+                <img src="https://images.unsplash.com/photo-1650682009477-52fd77302b78?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Smart Home Interface on Tablet">
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-light">
+        <div class="container feature-container">
+            <div class="feature-text">
+                <h2>Smart Control</h2>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-check"></i> Smart Lighting Setup</li>
+                    <li><i class="fa-solid fa-check"></i> Media Room Setup</li>
+                    <li><i class="fa-solid fa-check"></i> Smart Thermostat Installation</li>
+                    <li><i class="fa-solid fa-check"></i> Smart Door Lock Installation</li>
+                </ul>
+                <div class="feature-btn">
+                    <a href="#" class="btn btn-teal">Learn More</a>
+                </div>
+            </div>
+            <div class="feature-image">
+                <img src="https://images.unsplash.com/photo-1534723452862-4c874018d66d?q=80&w=1200&auto=format&fit=crop" alt="Smart Home App on Phone">
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="container contact-wrapper">
+            <div class="contact-form-container">
+                <h2>Contact Us</h2>
+                <p>Get in touch for a free consultation.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" rows="5" placeholder="Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-send">SEND</button>
+                </form>
+            </div>
+            <div class="contact-image" title="Tablet with house icon"></div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="cta-bar">
+                <div class="cta-content">
+                    <h3>Ready to get started? Let's talk about creating your competitive advantage</h3>
+                    <a href="#" class="btn btn-teal">TALK TO AN EXPERT</a>
+                </div>
+            </div>
+
+            <div class="main-footer">
+                <div class="footer-col">
+                    <span class="footer-logo">SMART HOME</span>
+                    <div class="contact-info">
+                        <p><i class="fa-solid fa-map-pin"></i> 7507 Dewey Route, East Darryville, ME 36032, United States</p>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Need help?</h4>
+                    <div class="contact-info">
+                        <p><i class="fa-solid fa-phone"></i> +1-800-123-4567</p>
+                        <p><i class="fa-regular fa-clock"></i> Monday - Friday 9:00-20:00</p>
+                        <p><i class="fa-regular fa-envelope"></i> smarthome@support.com</p>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About Company</a></li>
+                        <li><a href="#">Our Services</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
