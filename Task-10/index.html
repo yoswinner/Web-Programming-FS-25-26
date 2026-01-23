@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 10: JS Variables</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; line-height: 1.6; }
+        .result-box { background: #f4f4f4; padding: 15px; border-left: 5px solid #007BFF; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <h1>Task 10: Variables & User Interaction</h1>
+
+    <script>
+        alert("Welcome! This script demonstrates JS variables and user interaction.");
+
+        const studentName = "Yash Pradhan";
+        const branch = "CSE Core"; 
+        let currentSem = 4;
+        var subject = "Web Technologies";
+
+        let userResponse = prompt("Please enter a custom message for your dashboard:", "Hello World");
+        
+        let isConfirmed = confirm("Do you want to display your detailed info?");
+
+        if (isConfirmed) {
+            document.write(`
+                <div class='result-box'>
+                    <h3>Student Details (Const & Let)</h3>
+                    <strong>Name:</strong> ${studentName} <br>
+                    <strong>Branch:</strong> ${branch} <br>
+                    <strong>Semester:</strong> ${currentSem} <br>
+                    <strong>Subject:</strong> ${subject}
+                </div>
+            `);
+        } else {
+            document.write("<p>User cancelled the detailed view.</p>");
+        }
+
+        document.write(`
+            <div class='result-box'>
+                <h3>User Input (Prompt)</h3>
+                <strong>Your Message:</strong> ${userResponse}
+            </div>
+        `);
+
+        console.log("Scope Test - Var: " + subject);
+        console.log("Scope Test - Let: " + currentSem);
+        console.log("Scope Test - Const: " + studentName);
+    </script>
+
+</body>
+</html>
