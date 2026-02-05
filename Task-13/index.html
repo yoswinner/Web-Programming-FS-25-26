@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grade Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .card {
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 30px;
+            display: inline-block;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            font-size: 18px;     
+            line-height: 1.6;
+        }
+
+        h2 { margin-top: 0; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Student Grade Report</h2>
+        <p>See the result below:</p>
+        <hr>  
+        <br>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        var score1 = Number(prompt("Enter Score for Subject 1 (0-100):"));
+        var score2 = Number(prompt("Enter Score for Subject 2 (0-100):"));
+        var score3 = Number(prompt("Enter Score for Subject 3 (0-100):"));
+        var score4 = Number(prompt("Enter Score for Subject 4 (0-100):"));
+        var score5 = Number(prompt("Enter Score for Subject 5 (0-100):"));
+
+        var total = score1 + score2 + score3 + score4 + score5;
+        var average = total / 5;
+        var letterGrade;
+
+        if (average >= 90 && average <= 100) {
+            letterGrade = "A";
+        } 
+        else if (average >= 80 && average <= 89) {
+            letterGrade = "B";
+        } 
+        else if (average >= 70 && average <= 79) {
+            letterGrade = "C";
+        } 
+        else if (average >= 60 && average <= 69) {
+            letterGrade = "D";
+        } 
+        else {
+            letterGrade = "F";
+        }
+
+        document.getElementById("output").innerHTML = 
+            "<strong>Numerical Average:</strong> " + average + "<br>" +
+            "<strong>Letter Grade:</strong> " + letterGrade;
+    </script>
+
+</body>
+</html>
