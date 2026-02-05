@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 350px;
+        }
+
+        h2 { text-align: center; color: #333; }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .strength-bar-container {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s, background-color 0.3s;
+        }
+
+        .strength-text {
+            text-align: right;
+            font-size: 12px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            font-size: 13px;
+        }
+
+        li {
+            color: #777;
+            margin-bottom: 5px;
+        }
+
+        li.valid {
+            color: green;
+            font-weight: bold;
+        }
+        
+        li:before {
+            content: "✖ ";
+        }
+        
+        li.valid:before {
+            content: "✔ ";
+        }
+        .weak { background-color: #ff4d4d; }
+        .medium { background-color: #ffcc00; }
+        .strong { background-color: #28a745; }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Let's Password yos</h2>
+        
+        <input type="password" id="passwordInput" placeholder="Type your password..." onkeyup="checkStrength()">
+        
+        <div class="strength-bar-container">
+            <div id="strengthBar" class="strength-bar"></div>
+        </div>
+        <div id="strengthText" class="strength-text"></div>
+
+        <ul>
+            <li id="length">Minimum 8 characters</li>
+            <li id="uppercase">One uppercase letter</li>
+            <li id="lowercase">One lowercase letter</li>
+            <li id="number">One number</li>
+            <li id="special">One special character</li>
+        </ul>
+    </div>
+
+    <script>
+        function checkStrength() {
+            const password = document.getElementById('passwordInput').value;
+            const hasLength = password.length >= 8;
+            const hasUpper = /[A-Z]/.test(password);
+            const hasLower = /[a-z]/.test(password);
+            const hasNumber = /[0-9]/.test(password);
+            const hasSpecial = /[^A-Za-z0-9]/.test(password);
+            updateItem('length', hasLength);
+            updateItem('uppercase', hasUpper);
+            updateItem('lowercase', hasLower);
+            updateItem('number', hasNumber);
+            updateItem('special', hasSpecial);
+            let criteriaMet = 0;
+            if (hasLength) criteriaMet++;
+            if (hasUpper) criteriaMet++;
+            if (hasLower) criteriaMet++;
+            if (hasNumber) criteriaMet++;
+            if (hasSpecial) criteriaMet++;
+            const bar = document.getElementById('strengthBar');
+            const text = document.getElementById('strengthText');
+            bar.className = 'strength-bar'; 
+            
+            if (criteriaMet === 0) {
+                bar.style.width = '0%';
+                text.innerText = '';
+            } 
+            else if (criteriaMet <= 2) {
+                bar.classList.add('weak');
+                bar.style.width = '33%';
+                text.innerText = 'Weak';
+                text.style.color = '#ff4d4d';
+            } 
+            else if (criteriaMet >= 3 && criteriaMet < 5) {
+                bar.classList.add('medium');
+                bar.style.width = '66%';
+                text.innerText = 'Medium';
+                text.style.color = '#e6b800';
+            } 
+            else if (criteriaMet === 5) {
+                bar.classList.add('strong');
+                bar.style.width = '100%';
+                text.innerText = 'Strong';
+                text.style.color = '#28a745';
+            }
+        }
+        function updateItem(id, isValid) {
+            const item = document.getElementById(id);
+            if (isValid) {
+                item.classList.add('valid');
+            } else {
+                item.classList.remove('valid');
+            }
+        }
+    </script>
+
+</body>
+</html>
