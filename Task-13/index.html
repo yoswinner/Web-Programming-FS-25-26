@@ -1,69 +1,162 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Grade Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Checker</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            text-align: center;
-            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
 
-        .card {
-            background-color: white;
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 350px;
+        }
+
+        h2 { text-align: center; color: #333; }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
             border: 1px solid #ccc;
-            padding: 30px;
-            display: inline-block;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            font-size: 18px;     
-            line-height: 1.6;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .strength-bar-container {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            overflow: hidden;
         }
 
-        h2 { margin-top: 0; }
+        .strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s, background-color 0.3s;
+        }
+
+        .strength-text {
+            text-align: right;
+            font-size: 12px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            font-size: 13px;
+        }
+
+        li {
+            color: #777;
+            margin-bottom: 5px;
+        }
+
+        li.valid {
+            color: green;
+            font-weight: bold;
+        }
+        
+        li:before {
+            content: "✖ ";
+        }
+        
+        li.valid:before {
+            content: "✔ ";
+        }
+        .weak { background-color: #ff4d4d; }
+        .medium { background-color: #ffcc00; }
+        .strong { background-color: #28a745; }
+
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <h2>Student Grade Report</h2>
-        <p>See the result below:</p>
-        <hr>  
-        <br>
-        <div id="output"></div>
+    <div class="container">
+        <h2>Let's Password yos</h2>
+        
+        <input type="password" id="passwordInput" placeholder="Type your password..." onkeyup="checkStrength()">
+        
+        <div class="strength-bar-container">
+            <div id="strengthBar" class="strength-bar"></div>
+        </div>
+        <div id="strengthText" class="strength-text"></div>
+
+        <ul>
+            <li id="length">Minimum 8 characters</li>
+            <li id="uppercase">One uppercase letter</li>
+            <li id="lowercase">One lowercase letter</li>
+            <li id="number">One number</li>
+            <li id="special">One special character</li>
+        </ul>
     </div>
 
     <script>
-        var score1 = Number(prompt("Enter Score for Subject 1 (0-100):"));
-        var score2 = Number(prompt("Enter Score for Subject 2 (0-100):"));
-        var score3 = Number(prompt("Enter Score for Subject 3 (0-100):"));
-        var score4 = Number(prompt("Enter Score for Subject 4 (0-100):"));
-        var score5 = Number(prompt("Enter Score for Subject 5 (0-100):"));
-
-        var total = score1 + score2 + score3 + score4 + score5;
-        var average = total / 5;
-        var letterGrade;
-
-        if (average >= 90 && average <= 100) {
-            letterGrade = "A";
-        } 
-        else if (average >= 80 && average <= 89) {
-            letterGrade = "B";
-        } 
-        else if (average >= 70 && average <= 79) {
-            letterGrade = "C";
-        } 
-        else if (average >= 60 && average <= 69) {
-            letterGrade = "D";
-        } 
-        else {
-            letterGrade = "F";
+        function checkStrength() {
+            const password = document.getElementById('passwordInput').value;
+            const hasLength = password.length >= 8;
+            const hasUpper = /[A-Z]/.test(password);
+            const hasLower = /[a-z]/.test(password);
+            const hasNumber = /[0-9]/.test(password);
+            const hasSpecial = /[^A-Za-z0-9]/.test(password);
+            updateItem('length', hasLength);
+            updateItem('uppercase', hasUpper);
+            updateItem('lowercase', hasLower);
+            updateItem('number', hasNumber);
+            updateItem('special', hasSpecial);
+            let criteriaMet = 0;
+            if (hasLength) criteriaMet++;
+            if (hasUpper) criteriaMet++;
+            if (hasLower) criteriaMet++;
+            if (hasNumber) criteriaMet++;
+            if (hasSpecial) criteriaMet++;
+            const bar = document.getElementById('strengthBar');
+            const text = document.getElementById('strengthText');
+            bar.className = 'strength-bar'; 
+            
+            if (criteriaMet === 0) {
+                bar.style.width = '0%';
+                text.innerText = '';
+            } 
+            else if (criteriaMet <= 2) {
+                bar.classList.add('weak');
+                bar.style.width = '33%';
+                text.innerText = 'Weak';
+                text.style.color = '#ff4d4d';
+            } 
+            else if (criteriaMet >= 3 && criteriaMet < 5) {
+                bar.classList.add('medium');
+                bar.style.width = '66%';
+                text.innerText = 'Medium';
+                text.style.color = '#e6b800';
+            } 
+            else if (criteriaMet === 5) {
+                bar.classList.add('strong');
+                bar.style.width = '100%';
+                text.innerText = 'Strong';
+                text.style.color = '#28a745';
+            }
         }
-
-        document.getElementById("output").innerHTML = 
-            "<strong>Numerical Average:</strong> " + average + "<br>" +
-            "<strong>Letter Grade:</strong> " + letterGrade;
+        function updateItem(id, isValid) {
+            const item = document.getElementById(id);
+            if (isValid) {
+                item.classList.add('valid');
+            } else {
+                item.classList.remove('valid');
+            }
+        }
     </script>
 
 </body>

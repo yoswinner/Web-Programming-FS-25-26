@@ -3,161 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Strength Checker</title>
+    <title>Input Validation</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            width: 350px;
-        }
-
-        h2 { text-align: center; color: #333; }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        .strength-bar-container {
-            height: 10px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            overflow: hidden;
-        }
-
-        .strength-bar {
-            height: 100%;
-            width: 0%;
-            transition: width 0.3s, background-color 0.3s;
-        }
-
-        .strength-text {
-            text-align: right;
-            font-size: 12px;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-            font-size: 13px;
-        }
-
-        li {
-            color: #777;
-            margin-bottom: 5px;
-        }
-
-        li.valid {
-            color: green;
-            font-weight: bold;
-        }
-        
-        li:before {
-            content: "✖ ";
-        }
-        
-        li.valid:before {
-            content: "✔ ";
-        }
-        .weak { background-color: #ff4d4d; }
-        .medium { background-color: #ffcc00; }
-        .strong { background-color: #28a745; }
-
+        body { font-family: sans-serif; display: flex; justify-content: center; padding: 20px; background-color: #f4f4f9; }
+        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9em; }
+        input { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        button { width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        #message { margin-top: 15px; padding: 10px; border-radius: 4px; display: none; font-size: 0.9em; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; display: block !important; }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; display: block !important; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h2>Let's Password yos</h2>
-        
-        <input type="password" id="passwordInput" placeholder="Type your password..." onkeyup="checkStrength()">
-        
-        <div class="strength-bar-container">
-            <div id="strengthBar" class="strength-bar"></div>
-        </div>
-        <div id="strengthText" class="strength-text"></div>
-
-        <ul>
-            <li id="length">Minimum 8 characters</li>
-            <li id="uppercase">One uppercase letter</li>
-            <li id="lowercase">One lowercase letter</li>
-            <li id="number">One number</li>
-            <li id="special">One special character</li>
-        </ul>
+<div class="container">
+    <h2>User Registration</h2>
+    
+    <div class="input-group">
+        <label>Full Name</label>
+        <input type="text" id="fullName" placeholder="e.g. Yash Pradhan">
     </div>
 
-    <script>
-        function checkStrength() {
-            const password = document.getElementById('passwordInput').value;
-            const hasLength = password.length >= 8;
-            const hasUpper = /[A-Z]/.test(password);
-            const hasLower = /[a-z]/.test(password);
-            const hasNumber = /[0-9]/.test(password);
-            const hasSpecial = /[^A-Za-z0-9]/.test(password);
-            updateItem('length', hasLength);
-            updateItem('uppercase', hasUpper);
-            updateItem('lowercase', hasLower);
-            updateItem('number', hasNumber);
-            updateItem('special', hasSpecial);
-            let criteriaMet = 0;
-            if (hasLength) criteriaMet++;
-            if (hasUpper) criteriaMet++;
-            if (hasLower) criteriaMet++;
-            if (hasNumber) criteriaMet++;
-            if (hasSpecial) criteriaMet++;
-            const bar = document.getElementById('strengthBar');
-            const text = document.getElementById('strengthText');
-            bar.className = 'strength-bar'; 
-            
-            if (criteriaMet === 0) {
-                bar.style.width = '0%';
-                text.innerText = '';
-            } 
-            else if (criteriaMet <= 2) {
-                bar.classList.add('weak');
-                bar.style.width = '33%';
-                text.innerText = 'Weak';
-                text.style.color = '#ff4d4d';
-            } 
-            else if (criteriaMet >= 3 && criteriaMet < 5) {
-                bar.classList.add('medium');
-                bar.style.width = '66%';
-                text.innerText = 'Medium';
-                text.style.color = '#e6b800';
-            } 
-            else if (criteriaMet === 5) {
-                bar.classList.add('strong');
-                bar.style.width = '100%';
-                text.innerText = 'Strong';
-                text.style.color = '#28a745';
-            }
+    <div class="input-group">
+        <label>VIT Email</label>
+        <input type="text" id="email" placeholder="yash.pradhan2024@vitstudent.ac.in">
+    </div>
+
+    <div class="input-group">
+        <label>Username</label>
+        <input type="text" id="username" placeholder="e.g. yash_05">
+    </div>
+
+    <div class="input-group">
+        <label>Hex Color Code</label>
+        <input type="text" id="hexColor" placeholder="e.g. #FFF or #123abc">
+    </div>
+
+    <button onclick="runValidation()">Validate</button>
+
+    <div id="message"></div>
+</div>
+
+<script>
+    function runValidation() {
+        const name = document.getElementById('fullName').value;
+        const email = document.getElementById('email').value;
+        const user = document.getElementById('username').value;
+        const hex = document.getElementById('hexColor').value;
+        const msgDiv = document.getElementById('message');
+
+        const nameRegex = /^[A-Z][a-z]+(?: [A-Z][a-z]+){1,2}$/;
+        const emailRegex = /^[a-z]+\.[a-z]+[0-9]{4}@vitstudent\.ac\.in$/;
+        const userRegex = /^[a-zA-Z]\w{4,14}$/;
+        const hexRegex = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
+
+        msgDiv.className = ''; 
+        
+        if (!nameRegex.test(name)) {
+            msgDiv.textContent = "Error: Full Name must be 2-3 words starting with Uppercase.";
+            msgDiv.classList.add('error');
+        } else if (!emailRegex.test(email)) {
+            msgDiv.textContent = "Error: Email format must be 'first.lastYYYY@vitstudent.ac.in'.";
+            msgDiv.classList.add('error');
+        } else if (!userRegex.test(user)) {
+            msgDiv.textContent = "Error: Username must be 5-15 chars and start with a letter.";
+            msgDiv.classList.add('error');
+        } else if (!hexRegex.test(hex)) {
+            msgDiv.textContent = "Error: Invalid Hex Color (e.g., #FFF or #ffffff).";
+            msgDiv.classList.add('error');
+        } else {
+            msgDiv.textContent = "Success! All inputs are valid.";
+            msgDiv.classList.add('success');
         }
-        function updateItem(id, isValid) {
-            const item = document.getElementById(id);
-            if (isValid) {
-                item.classList.add('valid');
-            } else {
-                item.classList.remove('valid');
-            }
-        }
-    </script>
+    }
+</script>
 
 </body>
 </html>
