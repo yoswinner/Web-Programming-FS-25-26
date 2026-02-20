@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Mini Projects</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 300px;
+        }
+
+        h1 { font-size: 1.2rem; color: #333; }
+        #counter-value { font-size: 3rem; margin: 10px 0; }
+
+        .btn {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.1s;
+        }
+
+        .btn:active { transform: scale(0.95); }
+
+        .increase { background-color: #4CAF50; color: white; }
+        .decrease { background-color: #f44336; color: white; }
+        .reset { background-color: #555; color: white; }
+        .bg-btn { 
+            margin-top: 20px; 
+            background-color: #2196F3; 
+            color: white; 
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Yash Counter</h1>
+        <div id="counter-value">0</div>
+        
+        <button class="btn decrease" onclick="changeCounter(-1)">Decrease</button>
+        <button class="btn reset" onclick="changeCounter('reset')">Reset</button>
+        <button class="btn increase" onclick="changeCounter(1)">Increase</button>
+
+        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #ccc;">
+
+        <button class="btn bg-btn" id="colorBtn">Change Background</button>
+    </div>
+
+    <script>
+        let count = 0;
+        const counterDisplay = document.getElementById('counter-value');
+
+        function changeCounter(amount) {
+            if (amount === 'reset') {
+                count = 0;
+            } else {
+                count += amount;
+            }
+            counterDisplay.textContent = count;
+            
+            if (count > 0) counterDisplay.style.color = "green";
+            else if (count < 0) counterDisplay.style.color = "red";
+            else counterDisplay.style.color = "#333";
+        }
+
+        const colorBtn = document.getElementById('colorBtn');
+
+        colorBtn.addEventListener('click', () => {
+            const hexChars = '0123456789ABCDEF';
+            let randomColor = '#';
+            
+            for (let i = 0; i < 6; i++) {
+                randomColor += hexChars[Math.floor(Math.random() * 16)];
+            }
+
+            document.body.style.backgroundColor = randomColor;
+        });
+    </script>
+</body>
+</html>
