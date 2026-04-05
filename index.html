@@ -37,9 +37,58 @@
       padding: 0 20px;
     }
 
-    h2 {
+    /* ✨ NEW: NestQuest Featured Card Styling ✨ */
+    .featured-card {
+      background: linear-gradient(135deg, #10002b, #3c096c);
+      color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 40px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      border: 2px solid #9d4edd;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .featured-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(157, 78, 221, 0.4);
+    }
+
+    .featured-card .badge {
+      display: inline-block;
+      background: #ff477e;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .featured-card h2 {
+      color: #ff477e;
+      margin: 0 0 10px 0;
+      font-size: 2.2rem;
+    }
+
+    .featured-card p {
+      color: #e0e0e0;
+      margin: 0;
+      font-size: 1.1rem;
+    }
+    /* ======================================= */
+
+    .section-title {
       margin-bottom: 15px;
       color: #111827;
+      font-size: 1.5rem;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 8px;
     }
 
     .task-list {
@@ -89,14 +138,21 @@
   </header>
 
   <main>
-    <h2>Tasks</h2>
+    
+    <a class="featured-card" href="NestQuest/">
+      <span class="badge">Web Design Project</span>
+      <h2>🏠 NestQuest</h2>
+      <p>Smart Roommate Compatibility Finder</p>
+    </a>
+
+    <h2 class="section-title">Lab Tasks</h2>
 
     <div class="task-list">
       <a class="task-card" href="Task-1/">
         <h3>Task 1</h3>
         <p>HTML & CSS Basics</p>
       </a>
-    
+      
       <a class="task-card" href="Task-2/">
         <h3>Task 2</h3>
         <p>List Styling</p>
