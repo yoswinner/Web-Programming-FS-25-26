@@ -44,7 +44,7 @@
       border-radius: 12px;
       text-decoration: none;
       display: block;
-      margin-bottom: 20px; /* Reduced slightly to fit multiple cards better */
+      margin-bottom: 20px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
       text-align: center;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -86,15 +86,46 @@
     .nestquest .badge { background: #ff477e; }
     .nestquest h2 { color: #ff477e; }
 
-    /* ✨ Theme 2: SereniMind (Teal/Deep Blue) ✨ */
+    /* ✨ Layout for DA 1 and DA 2 (Side by Side) ✨ */
+    .split-row {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 40px; /* Space before lab tasks */
+    }
+
+    .split-row .featured-card {
+      flex: 1; /* Makes both cards take up exactly half the space */
+      margin-bottom: 0; /* Removes bottom margin since they are side-by-side */
+    }
+
+    /* Makes the side-by-side cards stack on smaller mobile screens */
+    @media (max-width: 600px) {
+      .split-row {
+        flex-direction: column;
+      }
+      .split-row .featured-card {
+        margin-bottom: 20px;
+      }
+    }
+
+    /* ✨ Theme 2: Portfolio DA 1 (Emerald/Dark Green) ✨ */
+    .portfolio-da1 {
+      background: linear-gradient(135deg, #064e3b, #022c22);
+      border: 2px solid #10b981;
+    }
+    .portfolio-da1:hover { box-shadow: 0 12px 25px rgba(16, 185, 129, 0.4); }
+    .portfolio-da1 .badge { background: #059669; }
+    .portfolio-da1 h2 { color: #34d399; }
+
+    /* ✨ Theme 3: SereniMind (Teal/Deep Blue) ✨ */
     .serenimind {
       background: linear-gradient(135deg, #080818, #1e1b4b);
       border: 2px solid #06b6d4;
-      margin-bottom: 40px; /* Keeps space before Lab Tasks */
     }
     .serenimind:hover { box-shadow: 0 12px 25px rgba(6, 182, 212, 0.4); }
     .serenimind .badge { background: #7c3aed; }
     .serenimind h2 { color: #06b6d4; }
+    
     /* ======================================= */
 
     .section-title {
@@ -153,18 +184,25 @@
 
   <main>
     
-
     <a class="featured-card nestquest" href="NestQuest/">
       <span class="badge">Web Design Project</span>
       <h2>🏠 NestQuest</h2>
       <p>Smart Roommate Compatibility Finder</p>
     </a>
 
-     <a class="featured-card serenimind" href="SereniMind project (DA 2)/">
-      <span class="badge">Digital Assignment 2</span>
-      <h2>🧠 SereniMind</h2>
-      <p>Student Mental Wellness Companion</p>
-    </a>
+    <div class="split-row">
+      <a class="featured-card portfolio-da1" href="Portfolio_(DA 1)/">
+        <span class="badge">Digital Assignment 1</span>
+        <h2>🚀 Portfolio</h2>
+        <p>Interactive Digital Resume</p>
+      </a>
+
+      <a class="featured-card serenimind" href="SereniMind project (DA 2)/">
+        <span class="badge">Digital Assignment 2</span>
+        <h2>🧠 SereniMind</h2>
+        <p>Student Mental Wellness Companion</p>
+      </a>
+    </div>
 
     <h2 class="section-title">Lab Tasks</h2>
 
